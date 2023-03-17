@@ -94,12 +94,10 @@ public class CourseMgtAppController {
 		Registration registration = new Registration();
 		registration.setRegId(regId);
 		regId=registration.getRegId();
-		//----------------------------------------------------------
 		Course theCourse = courseService.findById(courseId);
 		List<Registration> alist =theCourse.getRegistrations();
 		alist.add(registration);
 		theCourse.setRegistrations(alist);
-		//----------------------------------------------------------
 		theModel.addAttribute("registration",registration);
 		return "/students/add-registration-form";
 	} 
@@ -146,7 +144,6 @@ public class CourseMgtAppController {
 		return "redirect:/list";
 	}
 
-	//@Transactional//
 	@GetMapping("/deleteRegistration")
 	public String deleteRegistration(@RequestParam int studentId, @RequestParam int courseId ) {
 		RegistrationId theRegId= new RegistrationId(studentId,courseId);
@@ -201,8 +198,6 @@ public class CourseMgtAppController {
 		return "/grades/overall-grades";
 	}
 	
-	
-	//@Transactional
 	@GetMapping("/deleteGrade")
 	public String deleteGrade(@RequestParam int studentId, @RequestParam int courseId ) {
 		RegistrationId theRegId= new RegistrationId(studentId,courseId);
