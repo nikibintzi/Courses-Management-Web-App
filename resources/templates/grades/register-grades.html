@@ -1,0 +1,35 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<title>Add Grades</title>
+		
+		<link rel="stylesheet" 
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+			integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" 
+			crossorigin="anonymous" />
+	</head>
+	<body style="background-color: lightblue">
+		
+		<div class="container">
+		
+			<h3>Add Grades</h3>
+			<hr/>
+			
+			<form th:action="@{/saveGrade}" th:object="${grade}" method="POST">
+				<input type="hidden" th:field="*{regId.studentId}" />
+				<input type="hidden" th:field="*{regId.courseId}" />
+				<input type="hidden" th:field="*{overallGrade}" />
+				<th>Enter the project's grade:</th>
+				<input type="text" th:field="*{project}" class="form-control col-4 mb-4" placeholder="F.e. 10" />
+				<th>Enter the final exam's grade:</th>
+				<input type="text" th:field="*{finalExam}" class="form-control col-4 mb-4" placeholder="F.e. 10 hihi" />
+				
+				<button type="submit" class="btn btn-primary col-2">Save Grading</button>
+				
+			</form>
+			<hr/>
+			<a th:href="@{/list}">Back to course list</a>
+		</div>
+		
+	</body>
+</html>

@@ -1,0 +1,42 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<title>Update student registration</title>
+		
+		<link rel="stylesheet" 
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+			integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" 
+			crossorigin="anonymous" />
+	</head>
+	<body style="background-color: lightblue">
+		
+		<div class="container">
+		
+			<h3>Edit student registration</h3>
+			<hr/>
+			
+			<form th:action="@{/saveRegistration}" th:object="${registration}" method="POST">
+				<input type="hidden" th:field="*{regId.studentId}" />
+				<input type="hidden" th:field="*{regId.courseId}" />
+   				<th>Enter student name:</th>
+				<input type="text" th:field="*{studentName}" class="form-control col-4 mb-4" placeholder="F.e. Nikoletta Bintzilaiou" />
+				<th>Enter year of registration:</th>
+				<input type="text" th:field="*{year_of_reg}" class="form-control col-4 mb-4" placeholder="F.e. 2018" />
+				<th>Enter current semester:</th>
+				<input type="text" th:field="*{cur_semester}" class="form-control col-4 mb-4" placeholder="F.e. 8" />
+				
+				
+				<div class="col-sm-4 text-left">
+				<button type="submit" class="btn btn-primary col-8">Save info</button>
+				</div>
+				
+			</form>
+			<hr/>
+			
+			<a th:href="@{/list}">Back to list of courses</a>
+		</div>
+		
+		
+		
+	</body>
+</html>

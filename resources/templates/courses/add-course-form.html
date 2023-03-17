@@ -1,0 +1,40 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<title>Add course</title>
+		
+		<link rel="stylesheet" 
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+			integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" 
+			crossorigin="anonymous" />
+	</head>
+	<body style="background-color: lightblue">
+		<div class="container">
+		
+			<h3>Add New Course</h3>
+			<hr/>
+			
+			<form th:action="@{/saveCourse}" th:object="${course}" method="POST">
+				
+				<th>Enter Course Name:</th>
+				<input type="text" th:field="*{name}" class="form-control col-4 mb-4" placeholder="F.e. MYY802" />
+				<th>Enter syllabus:</th>
+				<input type="text" th:field="*{syllabus}" class="form-control col-4 mb-4" placeholder="F.e. Software Engineering" />
+				<th>Enter year:</th>
+				<input type="text" th:field="*{year}" class="form-control col-4 mb-4" placeholder="F.e. 4" />
+				<th>Enter semester:</th>
+				<input type="text" th:field="*{semester}" class="form-control col-4 mb-4" placeholder="F.e. 8" />
+				<th>Enter short description:</th>
+				<input type="text" th:field="*{description}" class="form-control col-4 mb-4" placeholder="F.e. software lifecycle " />
+				
+				<button type="submit" class="btn btn-primary col-2">Save</button>
+				<input type="hidden" th:field="*{id}" />
+				<input type="hidden" th:field="*{profUsername}" />
+				
+			</form>
+			<hr/>
+			<a th:href="@{/list}">Back to course list</a>
+		</div>
+		
+	</body>
+</html>

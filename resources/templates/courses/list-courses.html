@@ -1,0 +1,88 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+		<title>List courses</title>
+		
+		<link rel="stylesheet" 
+			type="text/css" 
+			href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css" />
+		<link rel="stylesheet" 
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+			integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" 
+			crossorigin="anonymous" />
+	</head>
+	
+	
+	<body style="background-color: lightblue">
+	
+	
+		
+		<div class="container">
+		 	<h2 th:inline="text">Courses of User: [[${#httpServletRequest.remoteUser}]]</h2>
+        	<form th:action="@{/logout}" method="post">
+            	<input type="submit" value="Sign Out"/>
+        	</form>
+        	
+
+<hr>
+			<h3>List Of Courses</h3>
+			
+			<hr/>
+			<a th:href="@{/addCourseForm}" class="btn btn-primary">Add Course</a>
+			
+			<table class="table table-bordered table-striped " id="courseTable">
+				<thead class="thead-dark">
+					<tr>
+						<th>Course Id</th>
+						<th>Course Name</th>
+						<th>Syllabus</th>
+						<th>Year</th>
+						<th>Semester</th>
+						<th>Description</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="course: ${courses}">
+						<td th:text="${course.id}" />
+						<td th:text="${course.name}" />
+						<td th:text="${course.syllabus}" />
+						<td th:text="${course.year}" />
+						<td th:text="${course.semester}" />
+						<td th:text="${course.description}" />
+
+						<td>
+							<a th:href="@{/addStudentForm(courseId=${course.id})}" class="btn btn-primary">Add Student</a>
+							
+							<a th:href="@{/showUpdateFormForCourses(courseId=${course.id})}" class="btn btn-success">Update</a>
+							
+							<a th:href="@{/deleteCourse(courseId=${course.id})}" 
+								class="btn btn-danger"
+								onclick="if (!(confirm('Are you sure you want to delete this course?'))) return false">
+									Delete
+							</a>
+							
+							<a th:href="@{/listRegistrationsPerCourse(courseId=${course.id})}" class="btn btn-info">Registrations</a>
+						</td>
+					</tr>
+				</tbody>
+				
+			</table>
+			
+		</div>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$("#courseTable").DataTable({
+						'aoColumnDefs': [{
+        				'bSortable': false,
+        				'aTargets': [-1] /* 1st one, start by the right */
+    				}]
+				});
+			})
+		</script>
+	</body>
+	
+</html>
